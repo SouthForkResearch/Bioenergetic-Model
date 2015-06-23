@@ -1,0 +1,49 @@
+Model Inputs,User Input Column,,,List of Species (select one and copy into cell B2)
+Species Name (choose from list at right),steelhead,,,alewife_YOY
+"Simulation Method (1= Enter P-values, Solve for Weights; 2 = Enter end Weights, solve for average p-values; 3 = enter consumption)",2,,,alewife_juvenile
+Total Number of Sites & Fish Combinations to Model,1,,,alewife_adult
+Number of Time Steps,363,,,bloater chub
+Pred (energy density of predator; Joules/gram wet body mass),5591,,,bluegull_juvenile
+Oxygen,13560,,,bluegill_adult
+PFF (Precent indigestible prey),0.1,,,coho_salmon
+Stability Factor,0.5,,,chinook_salmon
+"Error Lower Limit (precision level for iterative solution, Simulation Methods 2,3)",0.01,,,dace
+P-val and temperature filename,Temp_P_Prey_Input.csv,,,generalized_coregonid_YOY
+"Start weight, end weight, and/or consumption Input filename",Weights_Consumption_Input.csv,,,generalized_coregonid_juvenile
+,,,,generalized_coregonid_adult
+,,,,herring_juvenile
+,,,,herring_adult
+,,,,lake_trout
+,,,,largemouth_bass
+,,,,larval_yellow_perch
+,,,,muskellunge
+,,,,mysis
+,,,,nile_perch
+,,,,northern_pike
+,,,,pink
+,,,,sea_lamprey
+,,,,smallmouth_bass
+,,,,smelt_YOY
+,,,,smelt_juvenile
+,,,,smelt_adult
+,,,,sockeye1
+,,,,sockeye2
+,,,,steelhead
+,,,,striped_bass_age-1
+,,,,striped_bass_age-2
+,,,,striped_bass_age-3
+,,,,striped_bass_age-0
+,,,,striped_bass-larvae
+,,,,tilapia
+,,,,walleye_adult
+,,,,walley_juvenile
+,,,,walleye_pollock_juvenile
+,,,,walleye_pollock_adult
+,,,,yellow_perch_juvenile
+,,,,yellow_perch_adult
+,,,,bluefish_YOY
+,,,,bluefish_juvenile
+,,,,bluefish_adult_age-0
+,,,,weakfish_age-0
+,,,,weakfish_age-1+
+,,,,steelhead_EW
