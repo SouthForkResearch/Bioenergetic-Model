@@ -699,8 +699,8 @@ output=cbind(seq(1:Input$N.steps), "Cons(g)"=Results$Consumption,
   "Cons(Joules)"=Results$Consumption_j)
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
-col.names[i+1] = paste(site.names[i],"Cons(g)")
-col.names[Input$N.sites + i+1] = paste(site.names[i],"Cons(joules)")
+col.names[i+1] = paste(site.names[i],"Cons(g/g pred/day)")
+col.names[Input$N.sites + i+1] = paste(site.names[i],"Cons(joules/g pred/day)")
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Consumption", col.names=T, append=T)
@@ -713,8 +713,8 @@ output=cbind(seq(1:Input$N.steps), "Egestion(g)"=Results$Egestion,
   "Egestion(Joules)"=Results$Egestion_j)
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
-col.names[i+1] = paste(site.names[i],"Egestion(g)")
-col.names[Input$N.sites + i+1] = paste(site.names[i],"Egestion(joules)")
+col.names[i+1] = paste(site.names[i],"Egestion(g/g pred/day)")
+col.names[Input$N.sites + i+1] = paste(site.names[i],"Egestion(joules/g pred/day)")
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Egestion", col.names=T, append=T)
@@ -726,8 +726,8 @@ output=cbind(seq(1:Input$N.steps), "Excretion(g)"=Results$Excretion,
   "Excretion(Joules)"=Results$Excretion_j)
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
-col.names[i+1] = paste(site.names[i],"Excretion(g)")
-col.names[Input$N.sites + i+1] = paste(site.names[i],"Excretion(joules)")
+col.names[i+1] = paste(site.names[i],"Excretion(g/g pred/day)")
+col.names[Input$N.sites + i+1] = paste(site.names[i],"Excretion(joules/g pred/day)")
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Excretion", col.names=T, append=T)
@@ -739,8 +739,8 @@ output=cbind(seq(1:Input$N.steps), "Respiration(g)"=Results$Respiration,
   "Respiration(Joules)"=Results$Respiration_j)
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
-col.names[i+1] = paste(site.names[i],"Repiration(g)")
-col.names[Input$N.sites + i+1] = paste(site.names[i],"Respiration(joules)")
+col.names[i+1] = paste(site.names[i],"Repiration(g/g pred/day)")
+col.names[Input$N.sites + i+1] = paste(site.names[i],"Respiration(joules/g pred/day)")
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Respiration", col.names=T, append=T)
