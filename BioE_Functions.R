@@ -425,14 +425,25 @@ Oxygen=InputData$Oxygen
 	Growth_j=Growth
 	Consumpt=Growth
 	Consumpt_j=Growth
+	aConsumpt=Growth
+	aConsumpt_j=Growth
 	Excret=Growth
 	Excret_j=Growth
+	aExcret=Growth
+	aExcret_j=Growth
 	Egest=Growth
 	Egest_j=Growth   
+	aEgest=Growth
+	aEgest_j=Growth 
 	Respirat=Growth 
 	Respirat_j=Growth 
+	aRespirat=Growth 
+	aRespirat_j=Growth 
 	S.resp=Growth 
 	Sj.resp =Growth 
+      aS.resp=Growth 
+	aSj.resp =Growth 
+
 	Gg_WinBioE=Growth
       Gg_ELR=Growth
  	TotalC=rep(0, N.sites)
@@ -458,6 +469,8 @@ t=1
 	# store daily consumption 
 		Consumpt[t,]= as.numeric(Cons$CONS)
 		Consumpt_j[t,] = as.numeric(Cons$CONSj)
+		aConsumpt[t,]= as.numeric(Cons$CONS)*W[t,]
+		aConsumpt_j[t,] = as.numeric(Cons$CONSj)*W[t,]
 
 
 ### Excretion / Egestion
@@ -476,6 +489,10 @@ t=1
 		Excret_j[t,]=as.numeric(ExcEgest$Uj)
 		Egest[t,]=as.numeric(ExcEgest$EG)
 		Egest_j[t,]=as.numeric(ExcEgest$EGj)
+		aExcret[t,]=as.numeric(ExcEgest$U)*W[t,]
+		aExcret_j[t,]=as.numeric(ExcEgest$Uj)*W[t,]
+		aEgest[t,]=as.numeric(ExcEgest$EG)*W[t,]
+		aEgest_j[t,]=as.numeric(ExcEgest$EGj)*W[t,]
 
 
 ### Respiration
@@ -489,9 +506,12 @@ t=1
 	#store daily respiration results
 		Respirat[t,] = as.numeric(Resp$R)
 		Respirat_j[t,] = as.numeric(Resp$Rj)
+		aRespirat[t,] = as.numeric(Resp$R)*W[t,]
+		aRespirat_j[t,] = as.numeric(Resp$Rj)*W[t,]
 		S.resp[t,] = as.numeric(Resp$S)
 		Sj.resp[t,] = as.numeric(Resp$Sj)
-
+		aS.resp[t,] = as.numeric(Resp$S)*W[t,]
+		aSj.resp[t,] = as.numeric(Resp$Sj)*W[t,]
 
 ### Now calculate Growth
 
@@ -500,7 +520,7 @@ t=1
 	G <- Cons$CONS - Resp$R - ExcEgest$EG - ExcEgest$U - Resp$S
 	# growth in g/d - Grams of predator growth each day
 	Growth[t,] <- as.numeric(Gj*W[t,])/pred
-      Growth_j[t,] <- as.numeric(Gj)
+      Growth_j[t,] <- as.numeric(Gj*W[t,])
 
 
 	# [Eric's comment]: Calculate growth in g/g/d as I believe the Fish BioE 3.0 program does it, using fish weight at each time step	
@@ -538,7 +558,17 @@ t=1
 		"Respiration"=Respirat, 
 		"Respiration_j"=Respirat_j, 
 		"S.resp"=S.resp,
-		"Sj.resp"=Sj.resp
+		"Sj.resp"=Sj.resp,
+		"aConsumption"=aConsumpt,
+		"aConsumption_j"=aConsumpt_j,
+		"aExcretion"=aExcret,
+		"aExcretion_j"=aExcret_j,
+		"aEgestion"= aEgest,
+		"aEgestion_j"=aEgest_j,
+		"aRespiration"=aRespirat, 
+		"aRespiration_j"=aRespirat_j, 
+		"aS.resp"=aS.resp,
+		"aSj.resp"=aSj.resp
 	))
 	}
 
@@ -695,26 +725,40 @@ colnames(output) = col.names
 write.csv(output, "Results_Growth.csv")
 ########################
 # Consumption
+col.names = rep(0, 4*Input$N.sites+1)
+
 output=cbind(seq(1:Input$N.steps), "Cons(g)"=Results$Consumption, 
-  "Cons(Joules)"=Results$Consumption_j)
+  "Cons(Joules)"=Results$Consumption_j,
+ "abs Cons(g)"=Results$aConsumption, 
+  "abs Cons(Joules)"=Results$aConsumption_j)
+
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
 col.names[i+1] = paste(site.names[i],"Cons(g/g pred/day)")
 col.names[Input$N.sites + i+1] = paste(site.names[i],"Cons(joules/g pred/day)")
+col.names[2*Input$N.sites + i+1] = paste(site.names[i],"Cons(g/day)")
+col.names[3*Input$N.sites + i+1] = paste(site.names[i],"Cons(joules/day)")
 }
+
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Consumption", col.names=T, append=T)
 write.csv(output, "Results_Consumption.csv")
-
 ##################
 names(Results)
 # Egestion
 output=cbind(seq(1:Input$N.steps), "Egestion(g)"=Results$Egestion, 
-  "Egestion(Joules)"=Results$Egestion_j)
+  "Egestion(Joules)"=Results$Egestion_j,
+"aEgestion(g)"=Results$aEgestion, 
+  "aEgestion(Joules)"=Results$aEgestion_j
+
+
+)
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
 col.names[i+1] = paste(site.names[i],"Egestion(g/g pred/day)")
 col.names[Input$N.sites + i+1] = paste(site.names[i],"Egestion(joules/g pred/day)")
+col.names[2*Input$N.sites + i+1] = paste(site.names[i],"Egestion(g/day)")
+col.names[3*Input$N.sites + i+1] = paste(site.names[i],"Egestion(joules/day)")
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Egestion", col.names=T, append=T)
@@ -723,11 +767,17 @@ write.csv(output, "Results_Egestion.csv")
 ##################
 # Daily Excretion
 output=cbind(seq(1:Input$N.steps), "Excretion(g)"=Results$Excretion, 
-  "Excretion(Joules)"=Results$Excretion_j)
+  "Excretion(Joules)"=Results$Excretion_j,
+  "aExcretion(g)"=Results$aExcretion, 
+  "aExcretion(Joules)"=Results$aExcretion_j)
+
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
 col.names[i+1] = paste(site.names[i],"Excretion(g/g pred/day)")
 col.names[Input$N.sites + i+1] = paste(site.names[i],"Excretion(joules/g pred/day)")
+col.names[2*Input$N.sites + i+1] = paste(site.names[i],"Excretion(g/day)")
+col.names[3*Input$N.sites + i+1] = paste(site.names[i],"Excretion(joules/day)")
+
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Excretion", col.names=T, append=T)
@@ -736,11 +786,16 @@ write.csv(output, "Results_Excretion.csv")
 ##################
 # Daily Respiration
 output=cbind(seq(1:Input$N.steps), "Respiration(g)"=Results$Respiration, 
-  "Respiration(Joules)"=Results$Respiration_j)
+  "Respiration(Joules)"=Results$Respiration_j,
+  "aRespiration(g)"=Results$aRespiration, 
+  "aRespiration(Joules)"=Results$aRespiration_j)
 col.names[1] = "time"
 for (i in 1:Input$N.sites){
 col.names[i+1] = paste(site.names[i],"Repiration(g/g pred/day)")
 col.names[Input$N.sites + i+1] = paste(site.names[i],"Respiration(joules/g pred/day)")
+col.names[2*Input$N.sites + i+1] = paste(site.names[i],"Respiration(g/day)")
+col.names[3*Input$N.sites + i+1] = paste(site.names[i],"Respiration(joules/day)")
+
 }
 colnames(output) = col.names
 #write.xlsx(output,"BioEOutput.xlsx", sheetName="Respiration", col.names=T, append=T)
